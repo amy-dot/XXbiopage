@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Image Generator</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #141e30, #243b55);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .container {
+      width: 400px;
+      background: rgba(255,255,255,0.1);
+      padding: 25px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: #00c6ff;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #0072ff;
+    }
+
+    .image-box {
+      margin-top: 20px;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 15px;
+      display: none;
+    }
+
+    .loading {
+      margin-top: 15px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>AI Image Generator</h1>
+
+    <input 
+      type="text" 
+      id="promptInput" 
+      placeholder="Type a word..."
+    />
+
+    <button onclick="generateImage()">
+      Generate Image
+    </button>
+
+    <div class="loading" id="loading">
+      Generating image...
+    </div>
+
+    <div class="image-box">
+      <img id="generatedImage" />
+    </div>
+  </div>
+
+  <script>
+    async function generateImage() {
+
+      const prompt = document.getElementById("promptInput").value;
+
+      const image = document.getElementById("generatedImage");
+      const loading = document.getElementById("loading");
+
+      if (prompt.trim() === "") {
+        alert("Please enter a word");
+        return;
+      }
+
+      loading.style.display = "block";
+      image.style.display = "none";
+
+      // FREE AI IMAGE API
+      const imageUrl =
+        `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`;
+
+      // Simulate loading
+      setTimeout(() => {
+        image.src = imageUrl;
+
+        image.onload = () => {
+          loading.style.display = "none";
+          image.style.display = "block";
+        };
+
+      }, 1000);
+    }
+  </script>
+
+</body>
+</html>
