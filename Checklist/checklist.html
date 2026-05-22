@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Activity Checklist Generator</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      width: 100%;
+      max-width: 600px;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .input-section {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    input {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .generate-btn {
+      background: #007bff;
+      color: white;
+    }
+
+    .generate-btn:hover {
+      background: #0056b3;
+    }
+
+    .add-btn {
+      background: #28a745;
+      color: white;
+    }
+
+    .add-btn:hover {
+      background: #1e7e34;
+    }
+
+    ul {
+      list-style: none;
+      margin-top: 20px;
+    }
+
+    li {
+      background: #f5f5f5;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .item-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .checked {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    .delete-btn {
+      background: red;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+    }
+
+    .delete-btn:hover {
+      background: darkred;
+    }
+
+    .hint {
+      color: #555;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Activity Checklist Generator</h1>
+
+    <div class="input-section">
+      <input type="text" id="activityInput" placeholder="Enter an activity...">
+      <button class="generate-btn" onclick="generateChecklist()">Generate</button>
+    </div>
+
+    <p class="hint">
+      Try: camping, beach, school, gym, travel, picnic
+    </p>
+
+    <ul id="checklist"></ul>
+
+    <div class="input-section" style="margin-top:20px;">
+      <input type="text" id="customItemInput" placeholder="Add custom item...">
+      <button class="add-btn" onclick="addCustomItem()">Add</button>
+    </div>
+  </div>
+
+  <script>
+    const activityItems = {
+      camping: [
+        "Tent",
+        "Sleeping Bag",
+        "Flashlight",
+        "Water Bottle",
+        "Snacks",
+        "First Aid Kit"
+      ],
+      beach: [
+        "Towel",
+        "Sunscreen",
+        "Swimsuit",
+        "Sunglasses",
+        "Flip Flops",
+        "Water Bottle"
+      ],
+      school: [
+        "Notebook",
+        "Laptop",
+        "Pencils",
+        "Backpack",
+        "Charger"
+      ],
+      gym: [
+        "Workout Clothes",
+        "Sneakers",
+        "Water Bottle",
+        "Headphones",
+        "Towel"
+      ],
+      travel: [
+        "Passport/ID",
+        "Phone Charger",
+        "Wallet",
+        "Tickets",
+        "Clothes"
+      ],
+      picnic: [
+        "Blanket",
+        "Snacks",
+        "Drinks",
+        "Napkins",
+        "Plates"
+      ]
+    };
+
+    function generateChecklist() {
+      const activity = document.getElementById("activityInput").value.toLowerCase().trim();
+      const checklist = document.getElementById("checklist");
+
+      checklist.innerHTML = "";
+
+      let items = activityItems[activity];
+
+      if (!items) {
+        items = ["Phone", "Wallet", "Water Bottle"];
+      }
+
+      items.forEach(item => createChecklistItem(item));
+    }
+
+    function createChecklistItem(text) {
+      const checklist = document.getElementById("checklist");
+
+      const li = document.createElement("li");
+
+      const leftDiv = document.createElement("div");
+      leftDiv.className = "item-left";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+
+      const span = document.createElement("span");
+      span.textContent = text;
+
+      checkbox.addEventListener("change", () => {
+        span.classList.toggle("checked");
+      });
+
+      leftDiv.appendChild(checkbox);
+      leftDiv.appendChild(span);
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "X";
+      deleteBtn.className = "delete-btn";
+
+      deleteBtn.onclick = () => {
+        li.remove();
+      };
+
+      li.appendChild(leftDiv);
+      li.appendChild(deleteBtn);
+
+      checklist.appendChild(li);
+    }
+
+    function addCustomItem() {
+      const input = document.getElementById("customItemInput");
+      const text = input.value.trim();
+
+      if (text !== "") {
+        createChecklistItem(text);
+        input.value = "";
+      }
+    }
+  </script>
+
+</body>
+</html>
