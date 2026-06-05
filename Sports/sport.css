@@ -1,0 +1,46 @@
+body {
+  background: linear-gradient(to bottom right, #020617, #0f172a, #1e293b);
+  font-family: Arial, sans-serif;
+}
+
+.main-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sport-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sport-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.active-btn {
+  background: white;
+  color: #0f172a;
+}
+
+.workout-box {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.workout-item {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.number-circle {
+  width: 32px;
+  height: 32px;
+  background: white;
+  color: #0f172a;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Athlete Workout Generator</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="sport.css" />
+</head>
+<body class="min-h-screen text-white p-6">
+
+  <div class="max-w-5xl mx-auto">
+    <div class="main-card backdrop-blur-xl rounded-[2rem] shadow-2xl p-8">
+
+      <div class="text-center mb-10">
+        <div class="text-6xl mb-4">🏋️</div>
+
+        <h1 class="text-5xl font-extrabold tracking-tight">
+          Athlete Workout Generator
+        </h1>
+
+        <p class="text-gray-300 text-lg mt-3">
+          Choose your sport and get a custom workout plan.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <button onclick="showWorkout('basketball')" class="sport-btn active-btn rounded-2xl p-4 font-bold transition">
+          Basketball
+        </button>
+
+        <button onclick="showWorkout('soccer')" class="sport-btn rounded-2xl p-4 font-bold transition">
+          Soccer
+        </button>
+
+        <button onclick="showWorkout('football')" class="sport-btn rounded-2xl p-4 font-bold transition">
+          Football
+        </button>
+
+        <button onclick="showWorkout('track')" class="sport-btn rounded-2xl p-4 font-bold transition">
+          Track
+        </button>
+      </div>
+
+      <div class="workout-box rounded-3xl p-8 shadow-xl">
+        <h2 id="title" class="text-3xl font-bold mb-3"></h2>
+
+        <p id="focus" class="text-gray-200 text-lg mb-6"></p>
+
+        <ul id="workoutList" class="space-y-3"></ul>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="sport.js"></script>
+</body>
+</html>
+
